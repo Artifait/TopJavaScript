@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c4da0536-656d-48e2-8033-c39eab1d8b0f" name="Changes" comment="Add master page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DarkTheme.css" beforeDir="false" afterPath="$PROJECT_DIR$/DarkTheme.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
@@ -38,6 +37,9 @@
     "accountId": "8e0b3ac8-3ac7-4f25-8b22-3f1233fadb20"
   }
 }]]></component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 2
 }]]></component>
@@ -79,8 +81,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1737978268466</updated>
-      <workItem from="1737978269367" duration="3336000" />
+      <workItem from="1737978269367" duration="3473000" />
     </task>
+    <task id="LOCAL-00001" summary="Add master page">
+      <option name="closed" value="true" />
+      <created>1737983104509</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1737983104510</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
