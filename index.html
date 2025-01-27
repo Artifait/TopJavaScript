@@ -1,10 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TopJavaScript - Home</title>
+    <link rel="stylesheet" href="DarkTheme.css">
+    <style>
+        @keyframes logo-bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .logo {
+            font-size: 48px;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--color-success);
+            animation: logo-bounce 1.5s infinite;
+        }
+
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .card {
+            background-color: var(--color-background);
+            color: var(--color-foreground);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--color-success);
+        }
+
+        .card p {
+            line-height: 1.5;
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                width: 50%; /* Увеличиваем ширину карточек на средних и больших экранах */
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .card {
+                width: 40%; /* На очень больших экранах делаем ширину ещё больше */
+            }
+        }
+
+    </style>
 </head>
 <body>
-$END$
+<div class="logo">TopJavaScript</div>
+
+<div class="cards">
+    <!-- Карточка 1: О логике веток домашек -->
+    <div class="card">
+        <h3>Правила именования веток</h3>
+        <p>
+            Название ветки строится по следующему правилу:
+            <code>Js{тип задания}{номер}</code>.
+            Если задание состоит из нескольких задач, добавляется <code>Task{номер задачи}</code>.
+        </p>
+        Примеры:
+        <ul>
+            <li><code>JsPracticeOneTaskOne</code></li>
+            <li><code>JsModuleOneTaskOne</code></li>
+        </ul>
+    </div>
+
+    <!-- Карточка 2: О ветках репозитория -->
+    <div class="card">
+        <h3>Где лежат домашки?</h3>
+        <p>
+            Все домашние задания находятся в отдельных ветках данного репозитория.
+            Ветка <code>master</code> содержит общие стили и базовую документацию.
+            Чтобы переключиться на ветку с домашним заданием, используйте команду:
+        </p>
+        <p>
+            <code>git checkout имя-ветки</code>
+        </p>
+        <p>
+            Например:
+            <code>git checkout JsPracticeOne</code>
+        </p>
+    </div>
+</div>
 </body>
 </html>
