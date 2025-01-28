@@ -3,108 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopJavaScript - Home</title>
+    <title>Кредитный калькулятор</title>
     <link rel="stylesheet" href="DarkTheme.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        @keyframes logo-bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .logo {
-            font-size: 48px;
-            font-weight: bold;
-            text-align: center;
-            margin: 20px 0;
-            color: var(--color-success);
-            animation: logo-bounce 1.5s infinite;
-        }
-
-        .cards {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .card {
-            background-color: var(--color-background);
-            color: var(--color-foreground);
-            border: 1px solid var(--color-border);
-            border-radius: 8px;
+        .calculator {
+            max-width: 600px;
+            margin: 20px auto;
             padding: 20px;
-            width: 300px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            transition: transform 0.3s;
+            border: 1px solid #444;
+            border-radius: 10px;
+            background-color: #222;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
+        .calculator label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #ccc;
         }
 
-        .card h3 {
-            margin-top: 0;
-            color: var(--color-success);
+        .calculator input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #555;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
         }
 
-        .card p {
-            line-height: 1.5;
+        .calculator button {
+            padding: 10px 20px;
+            background-color: #10b981;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 20px;
         }
 
-        @media (min-width: 768px) {
-            .card {
-                width: 50%; /* Увеличиваем ширину карточек на средних и больших экранах */
-            }
+        .calculator button:hover {
+            background-color: #0e9b75;
         }
 
-        @media (min-width: 1200px) {
-            .card {
-                width: 40%; /* На очень больших экранах делаем ширину ещё больше */
-            }
+        .chart-container {
+            margin-top: 20px;
         }
-
     </style>
 </head>
 <body>
-<div class="logo">TopJavaScript</div>
+<div class="calculator">
+    <h2>Кредитный калькулятор</h2>
+    <label for="loan-amount">Сумма кредита (₽):</label>
+    <input type="number" id="loan-amount" placeholder="Введите сумму кредита" />
 
-<div class="cards">
-    <!-- Карточка 1: О логике веток домашек -->
-    <div class="card">
-        <h3>Правила именования веток</h3>
-        <p>
-            Название ветки строится по следующему правилу:
-            <code>Js{тип задания}{номер}</code>.
-            Если задание состоит из нескольких задач, добавляется <code>Task{номер задачи}</code>.
-        </p>
-        Примеры:
-        <ul>
-            <li><code>JsPracticeOne</code></li>
-            <li><code>JsPracticeOneTaskOne</code></li>
-            <li><code>JsModuleOneTaskOne</code></li>
-        </ul>
+    <label for="interest-rate">Процентная ставка (%):</label>
+    <input type="number" id="interest-rate" placeholder="Введите процентную ставку" />
+
+    <label for="loan-years">Срок кредита (лет):</label>
+    <input type="number" id="loan-years" placeholder="Введите срок кредита" />
+
+    <button onclick="calculateLoan()">Рассчитать</button>
+
+    <div class="results">
+        <p id="monthly-payment"></p>
+        <p id="total-payment"></p>
+        <p id="total-interest"></p>
     </div>
 
-    <!-- Карточка 2: О ветках репозитория -->
-    <div class="card">
-        <h3>Где лежат домашки?</h3>
-        <p>
-            Все домашние задания находятся в отдельных ветках данного репозитория.
-            Ветка <code>master</code> содержит общие стили и базовую документацию.
-            Чтобы переключиться на ветку с домашним заданием, используйте команду:
-        </p>
-        <p>
-            <code>git checkout имя-ветки</code>
-        </p>
-        <p>
-            Например:
-            <code>git checkout JsPracticeOne</code>
-        </p>
+    <div class="chart-container">
+        <canvas id="loanChart"></canvas>
     </div>
 </div>
+
+<script>
+    let loanChart;
+
+    function calculateLoan() {
+        const amount = parseFloat(document.getElementById('loan-amount').value);
+        const rate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
+        const years = parseInt(document.getElementById('loan-years').value);
+        const months = years * 12;
+
+        if (isNaN(amount) || isNaN(rate) || isNaN(years) || amount <= 0 || rate <= 0 || years <= 0) {
+            alert('Пожалуйста, введите корректные данные.');
+            return;
+        }
+
+        const x = Math.pow(1 + rate, months);
+        const monthlyPayment = (amount * x * rate) / (x - 1);
+        const totalPayment = monthlyPayment * months;
+        const totalInterest = totalPayment - amount;
+
+        document.getElementById('monthly-payment').textContent = `Ежемесячный платеж: ${monthlyPayment.toFixed(2)} ₽`;
+        document.getElementById('total-payment').textContent = `Общая сумма выплат: ${totalPayment.toFixed(2)} ₽`;
+        document.getElementById('total-interest').textContent = `Переплата по кредиту: ${totalInterest.toFixed(2)} ₽`;
+
+        // Update chart data
+        const chartData = {
+            labels: ['Основной долг', 'Переплата'],
+            datasets: [{
+                data: [amount, totalInterest],
+                backgroundColor: ['#10b981', '#ef4444'],
+            }]
+        };
+
+        if (loanChart) {
+            loanChart.destroy();
+        }
+
+        const ctx = document.getElementById('loanChart').getContext('2d');
+        loanChart = new Chart(ctx, {
+            type: 'pie',
+            data: chartData,
+        });
+    }
+</script>
 </body>
 </html>
