@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopJavaScript - Home</title>
+    <title>TopJavaScript - Homework</title>
     <link rel="stylesheet" href="DarkTheme.css">
     <style>
         @keyframes logo-bounce {
@@ -55,56 +55,60 @@
             line-height: 1.5;
         }
 
-        @media (min-width: 768px) {
-            .card {
-                width: 50%; /* Увеличиваем ширину карточек на средних и больших экранах */
-            }
+        .card input {
+            display: block;
+            width: calc(100% - 10px);
+            margin-bottom: 10px;
+            padding: 5px;
         }
-
-        @media (min-width: 1200px) {
-            .card {
-                width: 40%; /* На очень больших экранах делаем ширину ещё больше */
-            }
-        }
-
     </style>
 </head>
 <body>
 <div class="logo">TopJavaScript</div>
 
 <div class="cards">
-    <!-- Карточка 1: О логике веток домашек -->
+    <!-- Карточка 1: Сумма двух наибольших чисел -->
     <div class="card">
-        <h3>Правила именования веток</h3>
-        <p>
-            Название ветки строится по следующему правилу:
-            <code>Js{тип задания}{номер}</code>.
-            Если задание состоит из нескольких задач, добавляется <code>Task{номер задачи}</code>.
-        </p>
-        Примеры:
-        <ul>
-            <li><code>JsPracticeOne</code></li>
-            <li><code>JsPracticeOneTaskOne</code></li>
-            <li><code>JsModuleOneTaskOne</code></li>
-        </ul>
+        <h3>Сумма двух наибольших чисел</h3>
+        <input type="number" id="num1" placeholder="Число 1">
+        <input type="number" id="num2" placeholder="Число 2">
+        <input type="number" id="num3" placeholder="Число 3">
+        <button onclick="findMaxSum()">Рассчитать</button>
+        <p id="result1" class="success"></p>
     </div>
 
-    <!-- Карточка 2: О ветках репозитория -->
+    <!-- Карточка 2: Общие делители -->
     <div class="card">
-        <h3>Где лежат домашки?</h3>
-        <p>
-            Все домашние задания находятся в отдельных ветках данного репозитория.
-            Ветка <code>master</code> содержит общие стили и базовую документацию.
-            Чтобы переключиться на ветку с домашним заданием, используйте команду:
-        </p>
-        <p>
-            <code>git checkout имя-ветки</code>
-        </p>
-        <p>
-            Например:
-            <code>git checkout JsPracticeOne</code>
-        </p>
+        <h3>Общие делители</h3>
+        <input type="number" id="div1" placeholder="Число 1">
+        <input type="number" id="div2" placeholder="Число 2">
+        <button onclick="findCommonDivisors()">Найти</button>
+        <p id="result2" class="success"></p>
     </div>
 </div>
+
+<script>
+    function findMaxSum() {
+        let a = Number(document.getElementById('num1').value);
+        let b = Number(document.getElementById('num2').value);
+        let c = Number(document.getElementById('num3').value);
+        let nums = [a, b, c].sort((x, y) => y - x);
+        document.getElementById('result1').innerText = `Сумма двух наибольших: ${nums[0] + nums[1]}`;
+    }
+
+    function findCommonDivisors() {
+        let x = Number(document.getElementById('div1').value);
+        let y = Number(document.getElementById('div2').value);
+        let divisors = [];
+        let min = Math.min(x, y);
+
+        for (let i = 1; i <= min; i++) {
+            if (x % i === 0 && y % i === 0) {
+                divisors.push(i);
+            }
+        }
+        document.getElementById('result2').innerText = `Общие делители: ${divisors.join(', ')}`;
+    }
+</script>
 </body>
 </html>
